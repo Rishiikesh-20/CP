@@ -1,6 +1,5 @@
 import java.io.*;
-class Template
-{
+public class templateJava{
     static class Reader { 
         final private int BUFFER_SIZE = 1 << 16; 
         private DataInputStream din; 
