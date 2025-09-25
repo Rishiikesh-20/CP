@@ -5,13 +5,11 @@ public class contest2146A {
         int cur=arr[0];
         int longSub=Integer.MIN_VALUE;
         int currentOcc=0;
-        int count=1;
 
         int[] temp=new int[100];
         for(int i=0;i<arr.length;i++){
             if(cur!=arr[i]){
                 cur=arr[i];
-                count++;
                 currentOcc=0;
             }
             currentOcc++;
