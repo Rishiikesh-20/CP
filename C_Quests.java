@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class C_Quests{
+    static class FastScanner {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer("");
+
+        String next() {
+            while (!st.hasMoreTokens())
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {}
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        String nextLine() {
+            try {
+                return br.readLine();
+            } catch (IOException e) {
+                return null;
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        PrintWriter out = new PrintWriter(System.out);
+        FastScanner in = new FastScanner();
+
+        int t=in.nextInt();
+        while(t-->0){
+            int n=in.nextInt();
+            int k=in.nextInt();
+            int[] a=new int[n];
+            int[] b=new int[n];
+            for(int i=0;i<n;i++){
+                a[i]=in.nextInt();
+            }
+            for(int j=0;j<n;j++){
+                b[j]=in.nextInt();
+            }
+            int result=0;
+            int sum=0;
+            int max=Integer.MIN_VALUE;
+            for(int i=0;i<n;i++){
+                if(k-i<=0){
+                    break;
+                }
+                max=Math.max(max,b[i]);
+                sum+=a[i];
+                result=Math.max(result,sum + (k-i-1)*max);
+            }
+            System.out.println(result);
+        }
+        out.close();
+    }
+}
