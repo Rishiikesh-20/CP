@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME{
+public class C_1_Renako_Amaori_and_XOR_Game_easy_version{
     static class FastScanner {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer("");
@@ -36,11 +36,39 @@ public class CLASS_NAME{
         FastScanner in = new FastScanner();
 
         int t=in.nextInt();
-        testcase: while(t-->0){
-            
+        while(t-->0){
+            int n=in.nextInt();
+            int[] a=new int[n];
+            int[] b=new int[n];
+            for(int i=0;i<n;i++){
+                a[i]=in.nextInt();
+            }
+            for(int i=0;i<n;i++){
+                b[i]=in.nextInt();
+            }
+            int count1=0;
+            int count2=0;
+            int temp=-1;
+            for(int i=0;i<n;i++){
+                if(a[i]!=b[i]){
+                    temp=i+1;
+                    if((i+1)%2==1){
+                        count1++;
+                    }else{
+                        count2++;
+                    }
+                }
+            }
+            if((count1+count2)%2==0){
+                System.out.println("Tie");
+            }else {
+                if(temp%2!=0){
+                    System.out.println("Ajisai");
+                }else{
+                    System.out.println("Mai");
+                }
+            }
         }
-
-
         out.close();
     }
 }
