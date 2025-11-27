@@ -39,33 +39,27 @@ public class D_Rae_Taylor_and_Trees_easy_version{
         testcase: while(t-->0){
             int n=in.nextInt();
             int[] arr=new int[n];
-            int[] preSum=new int[n];
-            int ind=-1;
             for(int i=0;i<n;i++){
                 arr[i]=in.nextInt();
-                if(arr[i]==1){
-                    ind=i;
+            }
+            int[] preMin=new int[n];
+            int[] sufMax=new int[n];
+            preMin[0]=arr[0];
+            sufMax[n-1]=arr[n-1];
+            for(int i=1;i<n;i++){
+                preMin[i]=Math.min(arr[i],preMin[i-1]);
+            }
+            for(int i=n-2;i>=0;i--){
+                sufMax[i]=Math.max(arr[i],sufMax[i+1]);
+            }
+
+            for(int i=0;i<n-1;i++){
+                if(preMin[i]>sufMax[i+1]){
+                    System.out.println("No");
+                    continue testcase;
                 }
             }
-            if(arr[0]==1){
-                System.out.println("Yes");
-                continue testcase;
-            }else if(arr[0]==n){
-                System.out.println("No");
-                continue testcase;
-            }
-            preSum[0]=arr[0];
-            for(int i=1;i<n;i++){
-                preSum[i]=preSum[i-1]+arr[i];
-            }
-            int diff=preSum[n-1]-preSum[ind-1];
-            int len=n-ind;
-            int actual=len*(len+1)/2;
-            if(diff==actual){
-                System.out.println("No");
-            }else{
-                System.out.println("Yes");
-            }
+            System.out.println("Yes");
         }
 
 
