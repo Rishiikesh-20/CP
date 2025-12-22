@@ -46,10 +46,8 @@ public class C_Odd_Process{
                 if(arr[i]%2==0) even.add(arr[i]);
                 else odd.add(arr[i]);
             }
-            
-
-            Collections.sort(odd);
-            Collections.sort(even);
+            Collections.sort(odd,(a,b)->(b-a));
+            Collections.sort(even,(a,b)->(b-a));
 
             long[] preSumEven=new long[even.size()+1];
             long[] preSumOdd=new long[odd.size()+1];
@@ -69,45 +67,23 @@ public class C_Odd_Process{
                     System.out.print(0+" ");
                     continue;
                 }
-                if(k<=(1+even.size())){
-                    long result=odd.getLast();
-                    if(even.size()>0) result+=preSumEven[even.size()]-preSumEven[even.size()-(k-1)];
-                    System.out.print(result+" ");
-                }else{
-                    if(even.size()==0){
-                        if(k%2==0){
-                            System.out.print(0+" ");
-                        }else{
-                            System.out.print(odd.getLast()+" ");
-                        }
-                        continue;
-                    }
-                    int x=k-1-even.size();
-                    if(x==0){
-                        System.out.print(0+" ");
-                        continue;
-                    }else if(k%2==(1+even.size())%2){
-                        long result=odd.getLast();
-                        if(even.size()>0) result+=preSumEven[even.size()];
-
-                        System.out.print(result+" ");
-                    }else{
-                        if(x+1>=odd.size()){
-                            System.out.print(0+" ");
-                            continue;
-                        }
-                        int r=k-x-1;
-                        long result=odd.getLast();
-                        if(even.size()>0) result+=preSumEven[even.size()]-preSumEven[even.size()-(r-1)];
-                        System.out.print(result+" ");
-                    }
+                int os=odd.size();
+                int es=even.size();
+                int ce=Math.min(k-1,es);
+                int co=k-ce;
+                if(co%2==0){
+                    co++;
+                    ce--;
                 }
+                if(ce<0 || co>n-es){
+                    System.out.print(0+" ");
+                    continue;
+                }
+                long result=odd.getFirst()+preSumEven[ce];
+                System.out.print(result+" ");
             }
             System.out.println();
-
         }
-
-
         out.close();
     }
 }
