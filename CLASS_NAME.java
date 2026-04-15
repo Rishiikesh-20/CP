@@ -113,57 +113,55 @@ public class CLASS_NAME {
                 try {
                     tail = in.read(buffer, 0, buffer.length);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new UncheckedIOException(e);
                 }
                 if (tail <= 0) return -1;
             }
-            return buffer[head++];
+            return buffer[head++] & 0xff;
         }
 
         public int nextInt() {
             int c = read();
-            while (c <= ' ') {
-                if (c == -1) return -1;
-                c = read();
-            }
+            while (c != -1 && c <= ' ') c = read();
+            while (c != -1 && c != '-' && (c < '0' || c > '9')) c = read();
+            if (c == -1) return -1;
             boolean neg = false;
             if (c == '-') {
                 neg = true;
                 c = read();
             }
+            if (c == -1) return -1;
             int res = 0;
-            do {
+            while (c >= '0' && c <= '9') {
                 res = res * 10 + (c - '0');
                 c = read();
-            } while (c > ' ');
+            }
             return neg ? -res : res;
         }
 
         public long nextLong() {
             int c = read();
-            while (c <= ' ') {
-                if (c == -1) return -1;
-                c = read();
-            }
+            while (c != -1 && c <= ' ') c = read();
+            while (c != -1 && c != '-' && (c < '0' || c > '9')) c = read();
+            if (c == -1) return -1;
             boolean neg = false;
             if (c == '-') {
                 neg = true;
                 c = read();
             }
+            if (c == -1) return -1;
             long res = 0;
-            do {
+            while (c >= '0' && c <= '9') {
                 res = res * 10 + (c - '0');
                 c = read();
-            } while (c > ' ');
+            }
             return neg ? -res : res;
         }
 
         public String next() {
             int c = read();
-            while (c <= ' ') {
-                if (c == -1) return null;
-                c = read();
-            }
+            while (c != -1 && c <= ' ') c = read();
+            if (c == -1) return null;
             StringBuilder res = new StringBuilder();
             do {
                 res.appendCodePoint(c);
